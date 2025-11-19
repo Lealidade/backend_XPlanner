@@ -1,0 +1,6 @@
+enum FinancialDimension {
+  DESENROLA
+  ORGANIZA
+  RESERVA
+  INVESTE
+}

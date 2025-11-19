@@ -1,0 +1,50 @@
+// model UserXP {
+//     userId     String @id // PK = FK pro User
+//     userBetter User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//     // Campos da sua aplicação:
+//     username  String?
+//     birthYear Int?
+//     createdAt DateTime @default(now())
+//     updatedAt DateTime @updatedAt
+// }
+
+// model UserXP {
+//     id     String @id @default(cuid())
+//     userId String @unique
+
+//     userBetter User @relation(
+//     fields: [userId],
+//     references: [id],
+//     onDelete: cascade
+//     )
+
+//     // Campos da aplicação
+//     username  String?
+//     birthYear Int?
+//     createdAt DateTime @default(now())
+//     updatedAt DateTime @updatedAt
+
+//     // 🔗 relações EPIC 2
+//     financialProfile FinancialProfile?
+//     quizAnswers      UserQuizAnswer[]
+// }
+
+model UserXP {
+  id     String @id @default(cuid())
+  userId String @unique
+
+  userBetter User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Campos da aplicação
+  username  String?
+  birthYear Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // relações EPIC 2
+  financialProfile FinancialProfile?
+  quizAnswers      UserQuizAnswer[]
+
+  learningStepsProgress UserLearningStepProgress[]
+}

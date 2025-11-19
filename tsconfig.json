@@ -1,0 +1,25 @@
+{
+    "extends": "@tsconfig/node22/tsconfig.json",
+    "compilerOptions": {
+        // >>> habilita decorators para tsyringe <<<
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        // >>> alias @/ <<<
+        "baseUrl": "./src",
+        "paths": {
+            "@/*": [
+                "*"
+            ]
+        },
+        // organização do build (opcional, mas bom)
+        "rootDir": "./src",
+        "outDir": "./dist"
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}

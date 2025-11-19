@@ -1,0 +1,13 @@
+model QuizQuestion {
+  id        String             @id @default(cuid())
+  text      String
+  dimension FinancialDimension
+  order     Int
+  isActive  Boolean            @default(true)
+
+  options QuizOption[]
+  answers UserQuizAnswer[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
