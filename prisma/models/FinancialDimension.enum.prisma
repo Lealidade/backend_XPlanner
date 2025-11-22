@@ -16,3 +16,17 @@ enum RiskLevel {
   MEDIUM
   HIGH
 }
+
+// enum GoalCategory {
+//   DEBT // metas de quitar dívidas (impacta Desenrola)
+//   RESERVE // reserva de emergência
+//   INVESTMENT // investimentos em geral
+//   BUDGET // metas ligadas a organização de orçamento
+//   OTHER
+// }
+
+enum CashFlowOperation {
+  INCOME // dinheiro que entra
+  EXPENSE // dinheiro que sai
+  TRANSFER // movimentação interna (ex: enviar p/ meta)
+}

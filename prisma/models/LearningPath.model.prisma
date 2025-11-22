@@ -62,24 +62,6 @@ model LearningPath {
   updatedAt DateTime @updatedAt
 }
 
-// model LearningStep {
-//   id             String @id @default(cuid())
-//   learningPathId String
-
-//   learningPath LearningPath @relation(fields: [learningPathId], references: [id], onDelete: Cascade)
-
-//   order            Int
-//   title            String
-//   type             LearningContentType
-//   xpContentUrl     String? // link para artigo/vídeo XP
-//   estimatedMinutes Int?
-
-//   progress UserLearningStepProgress[]
-
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-// }
-
 model LearningStep {
   id             String @id @default(cuid())
   learningPathId String

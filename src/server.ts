@@ -108,7 +108,11 @@ import { onboardingRoutes } from "./modules/Onboarding/api/routes/onboarding.rou
 import { learningPathsRoutes } from "@/modules/LearningPaths/api/routes/learningPaths.routes";
 import { goalsRoutes } from "@/modules/Gamification/goals/api/routes/goals.routes"; // 👈 NOVO
 import { challengesRoutes } from "./modules/Gamification/challenges/api/routes/challenges.routes";
-import { gamificationRoutes } from "@/modules/Gamification/core/api/routes/gamification.routes";
+import { gamificationOverviewRoutes } from "./modules/Gamification/core/api/routes/gamification.routes";
+import { cashFlowRoutes } from "@/modules/CashFlow/api/routes/cashflow.routes";
+import { financialHealthRoutes } from "@/modules/Overview/api/routes/financialHealth.routes";
+
+
 
 
 async function bootstrap() {
@@ -152,8 +156,17 @@ async function bootstrap() {
     app.register(challengesRoutes, { prefix: "/gamification/challenges" });
 
     // ⭐ Overview de gamificação (dashboard)
-    app.register(gamificationRoutes, { prefix: "/gamification" });
+    app.register(gamificationOverviewRoutes, { prefix: "/gamification" });
 
+    // 🎯 CashFlow / Fluxo de Caixa
+    // GET  /cash-flow/summary
+    // GET  /cash-flow/list
+    // POST /cash-flow
+    app.register(cashFlowRoutes, { prefix: "/cash-flow" });
+
+    app.register(financialHealthRoutes, {
+        prefix: "/financial-health",
+    });
 
 
     // Rotas do Better Auth: /api/auth/*

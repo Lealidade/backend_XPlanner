@@ -1,0 +1,20 @@
+model CashFlow {
+  id String @id @default(cuid())
+
+  userXPId String
+  userXP   UserXP @relation(fields: [userXPId], references: [id], onDelete: Cascade)
+
+  // 👇 opcional: vincula a uma meta específica (quando o dinheiro vai para uma meta)
+  userGoalId String?
+  userGoal   UserGoal? @relation(fields: [userGoalId], references: [id])
+
+  date DateTime @default(now())
+
+  operation CashFlowOperation
+  value     Int // pra hackaton, inteiro (pode ser "reais" ou "centavos")
+  label     String // ex: "Salário XP", "Mercado", "Depósito meta Japão"
+  category  String // ex: "ALIMENTACAO", "MORADIA", "META_RESERVA"
+  recipient String? // ex: "XP Investimentos", "Supermercado X"
+
+  createdAt DateTime @default(now())
+}

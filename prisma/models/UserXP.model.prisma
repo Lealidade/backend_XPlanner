@@ -100,4 +100,7 @@ model UserXP {
   userGoals             UserGoal[]
   challengesProgress    UserChallengeProgress[]
   badges                UserBadge[]
+
+  // 👇 NOVO
+  cashFlows CashFlow[]
 }

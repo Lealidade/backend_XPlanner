@@ -1,3 +1,43 @@
+// model Goal {
+//   id          String @id @default(cuid())
+//   title       String
+//   description String
+
+//   type      GoalType
+//   riskLevel RiskLevel
+
+//   recommendedProducts String[] // nomes de produtos XP recomendados
+//   iconUrl             String?
+
+//   xpPointsRewardOnCompletion Int @default(100)
+//   xpCoinsRewardOnCompletion  Int @default(0)
+
+//   userGoals UserGoal[]
+// }
+
+// model Goal {
+//   id          String @id @default(cuid())
+//   title       String
+//   description String
+
+//   type      GoalType
+//   riskLevel RiskLevel
+
+//   // 👇 NOVO: qual dimensão financeira essa meta impacta
+//   dimension FinancialDimension
+
+//   // 👇 NOVO: categoria da meta (usado no cálculo do score dinâmico)
+//   category GoalCategory @default(OTHER)
+
+//   recommendedProducts String[] // nomes de produtos XP recomendados
+//   iconUrl             String?
+
+//   xpPointsRewardOnCompletion Int @default(100)
+//   xpCoinsRewardOnCompletion  Int @default(0)
+
+//   userGoals UserGoal[]
+// }
+
 model Goal {
   id          String @id @default(cuid())
   title       String
@@ -6,7 +46,12 @@ model Goal {
   type      GoalType
   riskLevel RiskLevel
 
-  recommendedProducts String[] // nomes de produtos XP recomendados
+  dimension FinancialDimension
+
+  // 👇 só pra texto livre/pro front, sem lógica forte de back
+  category String? // ex: "Viagem", "Dívida", "Reserva", etc.
+
+  recommendedProducts String[]
   iconUrl             String?
 
   xpPointsRewardOnCompletion Int @default(100)

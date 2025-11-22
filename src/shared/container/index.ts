@@ -45,7 +45,17 @@ import { UserChallengeProgressRepository } from "@/modules/Gamification/challeng
 import { BadgeRepository } from "@/modules/Gamification/challenges/data/repositories/BadgeRepository";
 import { UserBadgeRepository } from "@/modules/Gamification/challenges/data/repositories/UserBadgeRepository";
 
+import type { ICashFlowRepository } from "@/modules/CashFlow/data/interfaces/ICashFlowRepository";
+import { CashFlowRepository } from "@/modules/CashFlow/data/repositories/CashFlowRepository";
+
+
 // ...
+
+container.registerSingleton<ICashFlowRepository>(
+    "CashFlowRepository",
+    CashFlowRepository,
+);
+
 
 container.registerSingleton<IChallengeRepository>(
     "ChallengeRepository",
