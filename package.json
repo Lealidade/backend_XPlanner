@@ -2,11 +2,13 @@
   "name": "xplanner",
   "version": "1.0.0",
   "description": "Projeto Hackaton da XP :)",
-  "main": "index.js",
+  "main": "src/server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx watch src/server.ts",
-    "db:seed": "prisma db seed"
+    "start": "tsx src/server.ts",
+    "db:seed": "prisma db seed",
+    "postinstall": "prisma generate && prisma migrate deploy"
   },
   "author": "João Leal",
   "license": "ISC",
