@@ -8,7 +8,8 @@
     "dev": "tsx watch src/server.ts",
     "start": "tsx src/server.ts",
     "db:seed": "prisma db seed",
-    "postinstall": "prisma generate && prisma migrate deploy"
+    "postinstall": "prisma generate",
+    "migrate:deploy": "prisma migrate deploy"
   },
   "author": "João Leal",
   "license": "ISC",
