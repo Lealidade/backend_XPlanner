@@ -1,18 +1,20 @@
+// src/modules/Onboarding/data/interfaces/IFinancialProfileRepository.ts
 import type { FinancialProfile } from "@/generated/prisma/client";
 
-export interface IUpsertFinancialProfileDTO {
-    userXPId: string;
+export type FinancialProfileUpsertInput = {
     overallScore: number;
     desenrolaScore: number;
     organizaScore: number;
     reservaScore: number;
     investeScore: number;
-}
+    hasCompletedOnboarding: boolean;
+};
 
 export interface IFinancialProfileRepository {
-    upsertForUserXP(
-        data: IUpsertFinancialProfileDTO,
-    ): Promise<FinancialProfile>;
-
     findByUserXPId(userXPId: string): Promise<FinancialProfile | null>;
+
+    upsertByUserXPId(
+        userXPId: string,
+        data: FinancialProfileUpsertInput,
+    ): Promise<FinancialProfile>;
 }

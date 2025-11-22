@@ -5,9 +5,10 @@ import { container } from "tsyringe";
 
 import { GetOrCreateUserXPService } from "@/modules/UserXP/services/GetOrCreateUserXP.service";
 import { ListQuizQuestionsService } from "@/modules/Onboarding/services/ListQuizQuestions.service";
-import { SubmitQuizAnswersAndCalculateScoreService } from "../../services/SubmitQuizAnswersAndCalculateScore.service";
 import { SubmitQuizAnswersBody, submitQuizAnswersBodySchema } from "../validators/submitQuizAnswers.schema";
 import { GetMyFinancialProfileService } from "../../services/GetMyFinancialProfile.service";
+import { SubmitQuizAnswersService } from "@/modules/Onboarding/services/SubmitQuizAnswers.service";
+
 
 export class OnboardingController {
     public async getQuiz(request: FastifyRequest, reply: FastifyReply) {
@@ -65,16 +66,14 @@ export class OnboardingController {
             });
         }
 
-        const submitService = container.resolve(
-            SubmitQuizAnswersAndCalculateScoreService,
-        );
+        const submitQuizAnswersService = container.resolve(SubmitQuizAnswersService);
 
-        const result = await submitService.execute({
+        const result = await submitQuizAnswersService.execute({
             userXPId: userXP.id,
-            answers: body.answers,
+            answers: body.answers,   // 👈 aqui é o ponto: usar body.answers
         });
 
-        return reply.send(result);
+        return reply.status(200).send(result);
     }
 
     public async getMyFinancialProfile(

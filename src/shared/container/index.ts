@@ -9,9 +9,6 @@ import { QuizQuestionRepository } from "@/modules/Onboarding/data/repositories/Q
 import { IQuizOptionRepository } from "@/modules/Onboarding/data/interfaces/IQuizOptionRepository";
 import { QuizOptionRepository } from "@/modules/Onboarding/data/repositories/QuizOptionRepository";
 
-import { IUserQuizAnswerRepository } from "@/modules/Onboarding/data/interfaces/IUserQuizAnswerRepository";
-import { UserQuizAnswerRepository } from "@/modules/Onboarding/data/repositories/UserQuizAnswerRepository";
-
 import { IFinancialProfileRepository } from "@/modules/Onboarding/data/interfaces/IFinancialProfileRepository";
 import { FinancialProfileRepository } from "@/modules/Onboarding/data/repositories/FinancialProfileRepository";
 
@@ -23,6 +20,92 @@ import { IUserLearningStepProgressRepository } from "@/modules/LearningPaths/dat
 
 import { LearningStepRepository } from "@/modules/LearningPaths/data/repositories/LearningStepRepository";
 import { UserLearningStepProgressRepository } from "@/modules/LearningPaths/data/repositories/UserLearningStepProgressRepository.ts";
+
+import { GoalRepository } from "@/modules/Gamification/goals/data/repositories/GoalRepository";
+import { UserGoalRepository } from "@/modules/Gamification/goals/data/repositories/UserGoalRepository";
+
+import type { IGoalRepository } from "@/modules/Gamification/goals/data/interfaces/IGoalRepository";
+import type { IUserGoalRepository } from "@/modules/Gamification/goals/data/interfaces/IUserGoalRepository";
+
+import { UserXPGamificationService } from "@/modules/Gamification/core/services/UserXPGamification.service";
+
+// ... imports que você já tem ...
+
+// ....
+
+// Challenges
+import type { IChallengeRepository } from "@/modules/Gamification/challenges/data/interfaces/IChallengeRepository";
+import type { IUserChallengeProgressRepository } from "@/modules/Gamification/challenges/data/interfaces/IUserChallengeProgressRepository";
+import type { IBadgeRepository } from "@/modules/Gamification/challenges/data/interfaces/IBadgeRepository";
+import type { IUserBadgeRepository } from "@/modules/Gamification/challenges/data/interfaces/IUserBadgeRepository";
+
+import { ChallengeRepository } from "@/modules/Gamification/challenges/data/repositories/ChallengeRepository";
+import { UserChallengeProgressRepository } from "@/modules/Gamification/challenges/data/repositories/UserChallengeProgressRepository";
+
+import { BadgeRepository } from "@/modules/Gamification/challenges/data/repositories/BadgeRepository";
+import { UserBadgeRepository } from "@/modules/Gamification/challenges/data/repositories/UserBadgeRepository";
+
+// ...
+
+container.registerSingleton<IChallengeRepository>(
+    "ChallengeRepository",
+    ChallengeRepository,
+);
+
+container.registerSingleton<IUserChallengeProgressRepository>(
+    "UserChallengeProgressRepository",
+    UserChallengeProgressRepository,
+);
+
+container.registerSingleton<IBadgeRepository>(
+    "BadgeRepository",
+    BadgeRepository,
+);
+
+container.registerSingleton<IUserBadgeRepository>(
+    "UserBadgeRepository",
+    UserBadgeRepository,
+);
+
+
+
+// ...
+
+// container.registerSingleton<IChallengeRepository>(
+//     "ChallengeRepository",
+//     ChallengeRepository,
+// );
+
+// container.registerSingleton<IUserChallengeProgressRepository>(
+//     "UserChallengeProgressRepository",
+//     UserChallengeProgressRepository,
+// );
+
+// container.registerSingleton<IBadgeRepository>(
+//     "BadgeRepository",
+//     BadgeRepository,
+// );
+
+// container.registerSingleton<IUserBadgeRepository>(
+//     "UserBadgeRepository",
+//     UserBadgeRepository,
+// );
+
+container.registerSingleton<UserXPGamificationService>(
+    "UserXPGamificationService",
+    UserXPGamificationService,
+);
+
+
+container.registerSingleton<IGoalRepository>(
+    "GoalRepository",
+    GoalRepository,
+);
+
+container.registerSingleton<IUserGoalRepository>(
+    "UserGoalRepository",
+    UserGoalRepository,
+);
 
 container.registerSingleton<IUserLearningStepProgressRepository>(
     "UserLearningStepProgressRepository",
@@ -43,11 +126,6 @@ container.registerSingleton<ILearningPathRepository>(
 container.registerSingleton<IQuizOptionRepository>(
     "QuizOptionRepository",
     QuizOptionRepository,
-);
-
-container.registerSingleton<IUserQuizAnswerRepository>(
-    "UserQuizAnswerRepository",
-    UserQuizAnswerRepository,
 );
 
 container.registerSingleton<IFinancialProfileRepository>(

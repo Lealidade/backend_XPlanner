@@ -1,0 +1,11 @@
+model UserBadge {
+  id        String   @id @default(cuid())
+  userXPId  String
+  badgeId   String
+  awardedAt DateTime @default(now())
+
+  userXP UserXP @relation(fields: [userXPId], references: [id], onDelete: Cascade)
+  badge  Badge  @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+
+  @@unique([userXPId, badgeId])
+}

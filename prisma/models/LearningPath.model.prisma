@@ -6,12 +6,40 @@ enum LearningPathLevel {
 }
 
 // Tipo de conteúdo do passo
+// enum LearningContentType {
+//   ARTICLE // artigo / texto
+//   VIDEO // vídeo
+//   TOOL // planilha/ferramenta
+//   OTHER
+// }
+
 enum LearningContentType {
-  ARTICLE // artigo / texto
-  VIDEO // vídeo
-  TOOL // planilha/ferramenta
+  ARTICLE
+  VIDEO
+  TOOL
+  QUIZ // 👈 novo
   OTHER
 }
+
+// model LearningPath {
+//   id          String @id @default(cuid())
+//   slug        String @unique
+//   title       String
+//   description String
+
+//   // Usa o enum que já temos do EPIC 2
+//   dimension FinancialDimension
+
+//   level            LearningPathLevel @default(BASIC)
+//   estimatedMinutes Int?
+//   isActive         Boolean           @default(true)
+//   order            Int               @default(0)
+
+//   steps LearningStep[]
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
 
 model LearningPath {
   id          String @id @default(cuid())
@@ -19,11 +47,12 @@ model LearningPath {
   title       String
   description String
 
-  // Usa o enum que já temos do EPIC 2
   dimension FinancialDimension
 
   level            LearningPathLevel @default(BASIC)
   estimatedMinutes Int?
+  imageUrl         String? // 👈 novo
+  totalSteps       Int? // 👈 novo (pode ser preenchido no seed)
   isActive         Boolean           @default(true)
   order            Int               @default(0)
 
@@ -32,6 +61,24 @@ model LearningPath {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+// model LearningStep {
+//   id             String @id @default(cuid())
+//   learningPathId String
+
+//   learningPath LearningPath @relation(fields: [learningPathId], references: [id], onDelete: Cascade)
+
+//   order            Int
+//   title            String
+//   type             LearningContentType
+//   xpContentUrl     String? // link para artigo/vídeo XP
+//   estimatedMinutes Int?
+
+//   progress UserLearningStepProgress[]
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
 
 model LearningStep {
   id             String @id @default(cuid())
@@ -42,8 +89,12 @@ model LearningStep {
   order            Int
   title            String
   type             LearningContentType
-  xpContentUrl     String? // link para artigo/vídeo XP
+  xpContentUrl     String?
   estimatedMinutes Int?
+
+  // 👇 se for um passo do tipo QUIZ, aponta pra QuizContent
+  quizContentId String?      @unique
+  quizContent   QuizContent? @relation(fields: [quizContentId], references: [id])
 
   progress UserLearningStepProgress[]
 

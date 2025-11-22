@@ -6,7 +6,6 @@ model QuizQuestion {
   isActive  Boolean            @default(true)
 
   options QuizOption[]
-  answers UserQuizAnswer[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

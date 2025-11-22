@@ -1,0 +1,17 @@
+model Challenge {
+  id             String        @id @default(cuid())
+  title          String
+  description    String
+  challengeType  ChallengeType
+  durationDays   Int
+  xpPointsReward Int
+  xpCoinsReward  Int?          @default(0)
+  badgeId        String?
+  badge          Badge?        @relation(fields: [badgeId], references: [id])
+  iconUrl        String
+
+  userProgresses UserChallengeProgress[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

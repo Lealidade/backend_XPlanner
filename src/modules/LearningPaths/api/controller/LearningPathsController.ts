@@ -8,6 +8,7 @@ import { GetRecommendedLearningPathsService } from "@/modules/LearningPaths/serv
 import { GetLearningPathByIdService } from "@/modules/LearningPaths/services/GetLearningPathById.service";
 import { MarkLearningStepCompletedService } from "../../services/MarkLearningStepCompleted.service";
 import { GetLearningPathProgressService } from "../../services/GetLearningPathProgress.service";
+import { CompleteLearningStepService } from "../../services/CompleteLearningStep.service";
 
 export class LearningPathsController {
     public async getRecommended(
@@ -53,6 +54,86 @@ export class LearningPathsController {
             );
 
             return reply.status(500).send({ error: "internal_server_error" });
+        }
+    }
+
+    private async getSessionUserXP(request: FastifyRequest) {
+        const session = await auth.api.getSession({
+            headers: toWebHeaders(request.headers as any),
+        });
+
+        if (!session?.user) {
+            throw new Error("UNAUTHORIZED");
+        }
+
+        const getOrCreateUserXP = container.resolve(GetOrCreateUserXPService);
+        const userXP = await getOrCreateUserXP.execute({
+            userId: session.user.id,
+            defaultUsername: session.user.email?.split("@")[0],
+        });
+
+        return { session, userXP };
+    }
+
+    // public async completeStep(
+    //     request: FastifyRequest,
+    //     reply: FastifyReply,
+    // ): Promise<FastifyReply> {
+    //     try {
+    //         const { userXP } = await this.getSessionUserXP(request);
+    //         const stepId = (request.params as any).id as string;
+
+    //         const service = container.resolve(CompleteLearningStepService);
+
+    //         const { progress, rewards } = await service.execute({
+    //             userXPId: userXP.id,
+    //             learningStepId: stepId,
+    //         });
+
+    //         return reply.send({
+    //             progress,
+    //             rewards,
+    //         });
+    //     } catch (err: any) {
+    //         if (err.message === "UNAUTHORIZED") {
+    //             return reply.status(401).send({ error: "unauthorized" });
+    //         }
+    //         if (err.message === "LEARNING_STEP_NOT_FOUND") {
+    //             return reply.status(404).send({ error: err.message });
+    //         }
+
+    //         console.error(err);
+    //         return reply.status(500).send({ error: "internal_error" });
+    //     }
+    // }
+
+    public async completeStep(
+        request: FastifyRequest,
+        reply: FastifyReply,
+    ): Promise<FastifyReply> {
+        try {
+            const { userXP } = await this.getSessionUserXP(request);
+
+            // 👇 importante: bater com o nome na rota (stepId)
+            const stepId = (request.params as any).stepId as string;
+
+            const service = container.resolve(CompleteLearningStepService);
+
+            const { progress, rewards } = await service.execute({
+                userXPId: userXP.id,
+                learningStepId: stepId,
+            });
+
+            return reply.send({ progress, rewards });
+        } catch (err: any) {
+            if (err.message === "UNAUTHORIZED") {
+                return reply.status(401).send({ error: "unauthorized" });
+            }
+            if (err.message === "LEARNING_STEP_NOT_FOUND") {
+                return reply.status(404).send({ error: err.message });
+            }
+            console.error(err);
+            return reply.status(500).send({ error: "internal_error" });
         }
     }
 

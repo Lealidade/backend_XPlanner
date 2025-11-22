@@ -1,0 +1,25 @@
+model UserGoal {
+  id       String  @id @default(cuid())
+  userXPId String
+  goalId   String?
+
+  userXP UserXP @relation(fields: [userXPId], references: [id], onDelete: Cascade)
+  goal   Goal?  @relation(fields: [goalId], references: [id])
+
+  customTitle String
+
+  targetAmount  Int // simplificado pra hackaton
+  currentAmount Int      @default(0)
+  targetDate    DateTime
+
+  recommendedMonthlyDeposit Int
+  progressPercent           Int @default(0)
+
+  isActive    Boolean   @default(true)
+  completedAt DateTime?
+
+  xpCoinsRewardOnCompletion Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

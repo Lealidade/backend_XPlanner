@@ -4,3 +4,15 @@ enum FinancialDimension {
   RESERVA
   INVESTE
 }
+
+enum GoalType {
+  SHORT_TERM
+  MEDIUM_TERM
+  LONG_TERM
+}
+
+enum RiskLevel {
+  LOW
+  MEDIUM
+  HIGH
+}

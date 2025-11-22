@@ -30,21 +30,74 @@
 //     quizAnswers      UserQuizAnswer[]
 // }
 
+// model UserXP {
+//   id     String @id @default(cuid())
+//   userId String @unique
+
+//   userBetter User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//   // Campos da aplicação
+//   username  String?
+//   birthYear Int?
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   // relações EPIC 2
+//   financialProfile FinancialProfile?
+
+//   learningStepsProgress UserLearningStepProgress[]
+// }
+
+// model UserXP {
+//   id     String @id @default(cuid())
+//   userId String @unique
+
+//   userBetter User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//   // Campos da aplicação
+//   username  String?
+//   birthYear Int?
+
+//   // Gamificação
+//   avatarUrl      String?
+//   totalXp        Int     @default(0)
+//   currentLevel   String  @default("Money Rookie")
+//   xpToNextLevel  Int     @default(100) // quanto falta pra subir de nível
+//   dayStreak      Int     @default(0) // sequência de dias (simplificada)
+//   xpCoinsBalance Int     @default(0) // “cripto” / moedas virtuais
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   // relações EPIC 2
+//   financialProfile      FinancialProfile?
+//   // quizAnswers           UserQuizAnswer[]
+//   learningStepsProgress UserLearningStepProgress[]
+//   userGoals             UserGoal[]
+// }
+
 model UserXP {
   id     String @id @default(cuid())
   userId String @unique
 
   userBetter User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  // Campos da aplicação
   username  String?
   birthYear Int?
+
+  avatarUrl      String?
+  totalXp        Int     @default(0)
+  currentLevel   String  @default("Money Rookie")
+  xpToNextLevel  Int     @default(100)
+  dayStreak      Int     @default(0)
+  xpCoinsBalance Int     @default(0)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // relações EPIC 2
-  financialProfile FinancialProfile?
-  quizAnswers      UserQuizAnswer[]
-
+  financialProfile      FinancialProfile?
   learningStepsProgress UserLearningStepProgress[]
+  userGoals             UserGoal[]
+  challengesProgress    UserChallengeProgress[]
+  badges                UserBadge[]
 }

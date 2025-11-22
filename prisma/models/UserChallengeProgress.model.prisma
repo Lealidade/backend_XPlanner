@@ -1,0 +1,15 @@
+model UserChallengeProgress {
+  id              String    @id @default(cuid())
+  userXPId        String
+  challengeId     String
+  startDate       DateTime
+  endDate         DateTime
+  currentProgress Int
+  isCompleted     Boolean   @default(false)
+  completedAt     DateTime?
+
+  userXP    UserXP    @relation(fields: [userXPId], references: [id], onDelete: Cascade)
+  challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+  @@unique([userXPId, challengeId])
+}

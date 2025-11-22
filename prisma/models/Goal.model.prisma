@@ -1,0 +1,16 @@
+model Goal {
+  id          String @id @default(cuid())
+  title       String
+  description String
+
+  type      GoalType
+  riskLevel RiskLevel
+
+  recommendedProducts String[] // nomes de produtos XP recomendados
+  iconUrl             String?
+
+  xpPointsRewardOnCompletion Int @default(100)
+  xpCoinsRewardOnCompletion  Int @default(0)
+
+  userGoals UserGoal[]
+}

@@ -1,0 +1,10 @@
+-- AlterTable
+ALTER TABLE "FinancialProfile" ADD COLUMN     "lastScoreChange" INTEGER DEFAULT 0;
+
+-- AlterTable
+ALTER TABLE "UserXP" ADD COLUMN     "avatarUrl" TEXT,
+ADD COLUMN     "currentLevel" TEXT NOT NULL DEFAULT 'Money Rookie',
+ADD COLUMN     "dayStreak" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "totalXp" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "xpCoinsBalance" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "xpToNextLevel" INTEGER NOT NULL DEFAULT 100;
