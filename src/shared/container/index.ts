@@ -1,4 +1,3 @@
-// src/shared/container/index.ts
 import { container } from "tsyringe";
 import { IUserXPRepository } from "../../modules/UserXP/data/interfaces/IUserXPRepository";
 import { UserXPRepository } from "../../modules/UserXP/data/repositories/UserXPRepository"
@@ -29,11 +28,7 @@ import type { IUserGoalRepository } from "@/modules/Gamification/goals/data/inte
 
 import { UserXPGamificationService } from "@/modules/Gamification/core/services/UserXPGamification.service";
 
-// ... imports que você já tem ...
 
-// ....
-
-// Challenges
 import type { IChallengeRepository } from "@/modules/Gamification/challenges/data/interfaces/IChallengeRepository";
 import type { IUserChallengeProgressRepository } from "@/modules/Gamification/challenges/data/interfaces/IUserChallengeProgressRepository";
 import type { IBadgeRepository } from "@/modules/Gamification/challenges/data/interfaces/IBadgeRepository";
@@ -47,9 +42,6 @@ import { UserBadgeRepository } from "@/modules/Gamification/challenges/data/repo
 
 import type { ICashFlowRepository } from "@/modules/CashFlow/data/interfaces/ICashFlowRepository";
 import { CashFlowRepository } from "@/modules/CashFlow/data/repositories/CashFlowRepository";
-
-
-// ...
 
 container.registerSingleton<ICashFlowRepository>(
     "CashFlowRepository",
@@ -76,30 +68,6 @@ container.registerSingleton<IUserBadgeRepository>(
     "UserBadgeRepository",
     UserBadgeRepository,
 );
-
-
-
-// ...
-
-// container.registerSingleton<IChallengeRepository>(
-//     "ChallengeRepository",
-//     ChallengeRepository,
-// );
-
-// container.registerSingleton<IUserChallengeProgressRepository>(
-//     "UserChallengeProgressRepository",
-//     UserChallengeProgressRepository,
-// );
-
-// container.registerSingleton<IBadgeRepository>(
-//     "BadgeRepository",
-//     BadgeRepository,
-// );
-
-// container.registerSingleton<IUserBadgeRepository>(
-//     "UserBadgeRepository",
-//     UserBadgeRepository,
-// );
 
 container.registerSingleton<UserXPGamificationService>(
     "UserXPGamificationService",

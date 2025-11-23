@@ -1,16 +1,9 @@
-// src/modules/Overview/dtos/MeOverviewDTO.ts
-
-// Mesmos valores dos enums do Prisma
 export type FinancialDimension = "DESENROLA" | "ORGANIZA" | "RESERVA" | "INVESTE";
 
 export type LearningPathLevel = "BASIC" | "INTERMEDIATE" | "ADVANCED";
 
 export type LearningContentType = "ARTICLE" | "VIDEO" | "TOOL" | "OTHER";
 
-/**
- * Bloco "user" da resposta
- * Junta infos do User (Better Auth) + UserXP + flag de onboarding.
- */
 export interface MeOverviewUserDTO {
     name: string | null;
     email: string;
@@ -19,10 +12,6 @@ export interface MeOverviewUserDTO {
     hasCompletedOnboarding: boolean;
 }
 
-/**
- * Bloco "financialProfile" da resposta
- * Se o usuário ainda não fez o onboarding, esse bloco será null.
- */
 export interface MeOverviewFinancialProfileDTO {
     overallScore: number;
     desenrolaScore: number;
@@ -31,10 +20,6 @@ export interface MeOverviewFinancialProfileDTO {
     investeScore: number;
 }
 
-/**
- * Trilhas recomendadas que aparecerão na home.
- * Cada card de trilha terá esses dados.
- */
 export interface MeOverviewLearningPathDTO {
     id: string;
     slug: string;

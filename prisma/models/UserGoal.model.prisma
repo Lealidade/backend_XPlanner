@@ -1,29 +1,3 @@
-// model UserGoal {
-//   id       String  @id @default(cuid())
-//   userXPId String
-//   goalId   String?
-
-//   userXP UserXP @relation(fields: [userXPId], references: [id], onDelete: Cascade)
-//   goal   Goal?  @relation(fields: [goalId], references: [id])
-
-//   customTitle String
-
-//   targetAmount  Int // simplificado pra hackaton
-//   currentAmount Int      @default(0)
-//   targetDate    DateTime
-
-//   recommendedMonthlyDeposit Int
-//   progressPercent           Int @default(0)
-
-//   isActive    Boolean   @default(true)
-//   completedAt DateTime?
-
-//   xpCoinsRewardOnCompletion Int @default(0)
-
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-// }
-
 model UserGoal {
   id       String  @id @default(cuid())
   userXPId String
@@ -34,7 +8,7 @@ model UserGoal {
 
   customTitle String
 
-  targetAmount  Int // simplificado pra hackaton
+  targetAmount  Int
   currentAmount Int      @default(0)
   targetDate    DateTime
 
@@ -44,12 +18,10 @@ model UserGoal {
   isActive    Boolean   @default(true)
   completedAt DateTime?
 
-  // 👇 NOVO: última vez que o usuário colocou dinheiro nessa meta
   lastContributionAt DateTime?
 
   xpCoinsRewardOnCompletion Int @default(0)
 
-  // 👇 NOVO: ligações com movimentações de fluxo de caixa
   cashFlows CashFlow[]
 
   createdAt DateTime @default(now())

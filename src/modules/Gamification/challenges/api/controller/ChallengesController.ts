@@ -15,7 +15,6 @@ import {
 } from "../validators/updateChallengeProgress.schema";
 
 export class ChallengesController {
-    // mesmo pattern que GoalsController / LearningPathsController
     private async getSessionUserXP(request: FastifyRequest) {
         const session = await auth.api.getSession({
             headers: toWebHeaders(request.headers as any),
@@ -34,27 +33,6 @@ export class ChallengesController {
 
         return { session, userXP };
     }
-
-    // // GET /gamification/challenges
-    // public async listWithProgress(
-    //     request: FastifyRequest,
-    //     reply: FastifyReply,
-    // ): Promise<FastifyReply> {
-    //     try {
-    //         const { userXP } = await this.getSessionUserXP(request);
-
-    //         const service = container.resolve(ListChallengesWithProgressService);
-    //         const challenges = await service.execute(userXP.id);
-
-    //         return reply.send({ challenges });
-    //     } catch (err: any) {
-    //         if (err.message === "UNAUTHORIZED") {
-    //             return reply.status(401).send({ error: "unauthorized" });
-    //         }
-
-    //         return reply.status(500).send({ error: "internal_error" });
-    //     }
-    // }
 
     // GET /gamification/challenges
     public async listWithProgress(

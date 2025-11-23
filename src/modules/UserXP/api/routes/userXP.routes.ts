@@ -11,6 +11,4 @@ export async function userXPRoutes(app: FastifyInstance) {
     // /user-xp/me (update)
     app.patch("/me", (request, reply) => controller.updateMe(request, reply));
 
-    // se no futuro você quiser admin/CRUD, dá pra colocar:
-    // app.get("/:userId", (request, reply) => controller.showByUserId(request, reply));
 }

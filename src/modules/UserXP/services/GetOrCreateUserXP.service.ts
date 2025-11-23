@@ -1,4 +1,3 @@
-// src/modules/userXP/services/GetOrCreateUserXPService.ts
 import { injectable, inject } from "tsyringe";
 import { UserXP } from "@/generated/prisma/client";
 import { IUserXPRepository } from "../data/interfaces/IUserXPRepository";

@@ -1,0 +1,5 @@
+enum LearningPathLevel {
+    BASIC
+    INTERMEDIATE
+    ADVANCED
+}

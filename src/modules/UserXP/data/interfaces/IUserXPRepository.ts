@@ -1,4 +1,3 @@
-// src/modules/userXP/domain/repositories/IUserXPRepository.ts
 import { UserXP } from "../../../../generated/prisma/client";
 import { ICreateUserXPDTO } from "../dtos/ICreateUserXPDTO";
 import { IUpdateUserXPDTO } from "../dtos/IUpdateUserXPDTO";

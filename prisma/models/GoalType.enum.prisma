@@ -1,0 +1,5 @@
+enum GoalType {
+    SHORT_TERM
+    MEDIUM_TERM
+    LONG_TERM
+}

@@ -7,12 +7,12 @@
 //     stepId: string;
 // }
 
-// export interface LearningPathProgressDTO {
-//     learningPathId: string;
-//     totalSteps: number;
-//     completedStepsIds: string[];
-//     progressPercent: number;
-// }
+export interface LearningPathProgressDTO {
+    learningPathId: string;
+    totalSteps: number;
+    completedStepsIds: string[];
+    progressPercent: number;
+}
 
 // @injectable()
 // export class MarkLearningStepCompletedService {

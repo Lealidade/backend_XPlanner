@@ -10,7 +10,7 @@ type LevelInfo = {
 
 @injectable()
 export class UserXPGamificationService {
-    // regra simples de níveis – pode ajustar depois pro pitch
+    // regra simples de níveis
     private getLevelInfo(totalXp: number): LevelInfo {
         if (totalXp >= 1000) {
             return { level: "XP Master", xpToNextLevel: 0 };

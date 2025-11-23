@@ -1,4 +1,3 @@
-// src/modules/Overview/data/dtos/FinancialHealthOverviewDTO.ts
 import type { FinancialDimension } from "@/generated/prisma/client";
 import type { FinancialProfileDTO } from "@/modules/Onboarding/data/dtos/SubmitQuizAnswersDTO";
 

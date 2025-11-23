@@ -7,6 +7,5 @@ model QuizContent {
   xpPointsReward     Int
   xpCoinsReward      Int      @default(0)
 
-  // se quiser, depois podemos criar relações com outros modos de jogo (Quiz Battle, etc.)
   learningStep LearningStep?
 }

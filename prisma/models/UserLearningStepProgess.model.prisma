@@ -1,0 +1,12 @@
+model UserLearningStepProgress {
+    id             String @id @default(cuid())
+    userXPId       String
+    learningStepId String
+
+    userXP       UserXP       @relation(fields: [userXPId], references: [id], onDelete: Cascade)
+    learningStep LearningStep @relation(fields: [learningStepId], references: [id], onDelete: Cascade)
+
+    completedAt DateTime @default(now())
+
+    @@unique([userXPId, learningStepId])
+}

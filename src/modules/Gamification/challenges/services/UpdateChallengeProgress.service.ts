@@ -62,27 +62,6 @@ export class UpdateChallengeProgressService {
 
         const now = new Date();
 
-        // // se ainda não existe progresso, cria
-        // if (!progress) {
-        //     const endDate =
-        //         challenge.durationDays > 0
-        //             ? new Date(
-        //                 now.getTime() + challenge.durationDays * 24 * 60 * 60 * 1000,
-        //             )
-        //             : undefined;
-
-        //     progress = await this.progressRepository.create({
-        //         userXPId,
-        //         challengeId,
-        //         startDate: now,
-        //         endDate,
-        //         currentProgress,
-        //         isCompleted: false,
-        //         completedAt: null,
-        //     });
-        // }
-
-        // se ainda não existe progresso, cria
         if (!progress) {
             const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
 
@@ -95,7 +74,7 @@ export class UpdateChallengeProgressService {
                 userXPId,
                 challengeId,
                 startDate: now,
-                endDate,              // agora é só Date, sem undefined
+                endDate,
                 currentProgress,
                 isCompleted: false,
                 completedAt: null,

@@ -1,0 +1,20 @@
+model LearningStep {
+    id             String @id @default(cuid())
+    learningPathId String
+
+    learningPath LearningPath @relation(fields: [learningPathId], references: [id], onDelete: Cascade)
+
+    order            Int
+    title            String
+    type             LearningContentType
+    xpContentUrl     String?
+    estimatedMinutes Int?
+
+    quizContentId String?      @unique
+    quizContent   QuizContent? @relation(fields: [quizContentId], references: [id])
+
+    progress UserLearningStepProgress[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}

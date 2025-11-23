@@ -1,0 +1,7 @@
+enum LearningContentType {
+    ARTICLE
+    VIDEO
+    TOOL
+    QUIZ
+    OTHER
+}

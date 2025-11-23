@@ -1,0 +1,5 @@
+enum CashFlowOperation {
+    INCOME
+    EXPENSE
+    TRANSFER
+}
