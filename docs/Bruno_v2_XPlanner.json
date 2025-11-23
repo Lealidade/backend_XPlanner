@@ -32,7 +32,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/gamification/goals/templates",
+            "url": "{{dominio}}/gamification/goals/templates",
             "method": "GET",
             "headers": [],
             "params": [],
@@ -64,7 +64,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/gamification/goals/me",
+            "url": "{{dominio}}/gamification/goals/me",
             "method": "GET",
             "headers": [],
             "params": [],
@@ -96,7 +96,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/gamification/goals",
+            "url": "{{dominio}}/gamification/goals",
             "method": "POST",
             "headers": [],
             "params": [],
@@ -129,7 +129,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/gamification/goals",
+            "url": "{{dominio}}/gamification/goals",
             "method": "POST",
             "headers": [],
             "params": [],
@@ -162,7 +162,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/gamification/goals/:goalId/progress",
+            "url": "{{dominio}}/gamification/goals/:goalId/progress",
             "method": "PATCH",
             "headers": [],
             "params": [
@@ -202,7 +202,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/gamification/goals/:goalId/contribute",
+            "url": "{{dominio}}/gamification/goals/:goalId/contribute",
             "method": "POST",
             "headers": [],
             "params": [
@@ -262,7 +262,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/learning-paths/recommended",
+            "url": "{{dominio}}/learning-paths/recommended",
             "method": "GET",
             "headers": [],
             "params": [],
@@ -294,7 +294,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/learning-paths/:id",
+            "url": "{{dominio}}/learning-paths/:id",
             "method": "GET",
             "headers": [],
             "params": [
@@ -333,7 +333,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/learning-paths/:id/progress",
+            "url": "{{dominio}}/learning-paths/:id/progress",
             "method": "GET",
             "headers": [],
             "params": [
@@ -372,7 +372,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/learning-paths/steps/:stepId/complete",
+            "url": "{{dominio}}/learning-paths/steps/:stepId/complete",
             "method": "POST",
             "headers": [],
             "params": [
@@ -412,7 +412,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/learning-paths/steps/:stepId/complete-quiz",
+            "url": "{{dominio}}/learning-paths/steps/:stepId/complete-quiz",
             "method": "POST",
             "headers": [],
             "params": [
@@ -472,7 +472,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/onboarding/quiz/answers",
+            "url": "{{dominio}}/onboarding/quiz/answers",
             "method": "POST",
             "headers": [],
             "params": [],
@@ -505,7 +505,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/onboarding/financial-profile/me",
+            "url": "{{dominio}}/onboarding/financial-profile/me",
             "method": "GET",
             "headers": [],
             "params": [],
@@ -537,7 +537,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/onboarding/quiz",
+            "url": "{{dominio}}/onboarding/quiz",
             "method": "GET",
             "headers": [],
             "params": [],
@@ -589,7 +589,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/api/auth/sign-up/email",
+            "url": "{{dominio}}/api/auth/sign-up/email",
             "method": "POST",
             "headers": [
               {
@@ -633,7 +633,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/api/auth/sign-in/email",
+            "url": "{{dominio}}/api/auth/sign-in/email",
             "method": "POST",
             "headers": [
               {
@@ -672,7 +672,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/user-xp/me",
+            "url": "{{dominio}}/user-xp/me",
             "method": "GET",
             "headers": [],
             "params": [],
@@ -724,7 +724,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/gamification/overview",
+            "url": "{{dominio}}/gamification/overview",
             "method": "GET",
             "headers": [],
             "params": [],
@@ -776,7 +776,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/gamification/challenges",
+            "url": "{{dominio}}/gamification/challenges",
             "method": "GET",
             "headers": [],
             "params": [],
@@ -808,7 +808,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/gamification/challenges/:id/progress",
+            "url": "{{dominio}}/gamification/challenges/:id/progress",
             "method": "PATCH",
             "headers": [],
             "params": [
@@ -868,7 +868,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/cash-flow/summary?month=11&year=2025",
+            "url": "{{dominio}}/cash-flow/summary?month=11&year=2025",
             "method": "GET",
             "headers": [],
             "params": [
@@ -913,7 +913,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/cash-flow",
+            "url": "{{dominio}}/cash-flow",
             "method": "POST",
             "headers": [],
             "params": [],
@@ -966,7 +966,7 @@
           "tags": [],
           "examples": [],
           "request": {
-            "url": "http://localhost:3000/financial-health/overview",
+            "url": "{{dominio}}/financial-health/overview",
             "method": "GET",
             "headers": [],
             "params": [],
@@ -990,6 +990,20 @@
     }
   ],
   "environments": [],
+  "root": {
+    "request": {
+      "vars": {
+        "req": [
+          {
+            "uid": "fryMqzAlhDoUUY8VJWtOm",
+            "name": "dominio",
+            "value": "https://backendxplanner-production.up.railway.app",
+            "enabled": true
+          }
+        ]
+      }
+    }
+  },
   "brunoConfig": {
     "version": "1",
     "name": "XPlanner",

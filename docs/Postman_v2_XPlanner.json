@@ -17,10 +17,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/gamification/goals/templates",
-              "protocol": "http",
+              "raw": "{{dominio}}/gamification/goals/templates",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "gamification",
@@ -42,10 +42,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/gamification/goals/me",
-              "protocol": "http",
+              "raw": "{{dominio}}/gamification/goals/me",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "gamification",
@@ -67,10 +67,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/gamification/goals",
-              "protocol": "http",
+              "raw": "{{dominio}}/gamification/goals",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "gamification",
@@ -100,10 +100,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/gamification/goals",
-              "protocol": "http",
+              "raw": "{{dominio}}/gamification/goals",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "gamification",
@@ -133,10 +133,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/gamification/goals/:goalId/progress",
-              "protocol": "http",
+              "raw": "{{dominio}}/gamification/goals/:goalId/progress",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "gamification",
@@ -173,10 +173,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/gamification/goals/:goalId/contribute",
-              "protocol": "http",
+              "raw": "{{dominio}}/gamification/goals/:goalId/contribute",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "gamification",
@@ -218,10 +218,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/learning-paths/recommended",
-              "protocol": "http",
+              "raw": "{{dominio}}/learning-paths/recommended",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "learning-paths",
@@ -242,10 +242,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/learning-paths/:id",
-              "protocol": "http",
+              "raw": "{{dominio}}/learning-paths/:id",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "learning-paths",
@@ -271,10 +271,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/learning-paths/:id/progress",
-              "protocol": "http",
+              "raw": "{{dominio}}/learning-paths/:id/progress",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "learning-paths",
@@ -301,10 +301,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/learning-paths/steps/:stepId/complete",
-              "protocol": "http",
+              "raw": "{{dominio}}/learning-paths/steps/:stepId/complete",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "learning-paths",
@@ -341,10 +341,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/learning-paths/steps/:stepId/complete-quiz",
-              "protocol": "http",
+              "raw": "{{dominio}}/learning-paths/steps/:stepId/complete-quiz",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "learning-paths",
@@ -386,10 +386,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/onboarding/quiz/answers",
-              "protocol": "http",
+              "raw": "{{dominio}}/onboarding/quiz/answers",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "onboarding",
@@ -420,10 +420,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/onboarding/financial-profile/me",
-              "protocol": "http",
+              "raw": "{{dominio}}/onboarding/financial-profile/me",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "onboarding",
@@ -445,10 +445,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/onboarding/quiz",
-              "protocol": "http",
+              "raw": "{{dominio}}/onboarding/quiz",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "onboarding",
@@ -487,10 +487,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/api/auth/sign-up/email",
-              "protocol": "http",
+              "raw": "{{dominio}}/api/auth/sign-up/email",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "api",
@@ -529,10 +529,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/api/auth/sign-in/email",
-              "protocol": "http",
+              "raw": "{{dominio}}/api/auth/sign-in/email",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "api",
@@ -564,10 +564,10 @@
             },
             "description": "Para o hackaton, os campos mais relevantes para montar o painel inicial são:\n\nuser.name ou userXP.username – para saudação.\n\nuserXP.totalXp – XP total.\n\nuserXP.currentLevel – nome do nível atual.\n\nuserXP.xpToNextLevel – quanto falta pro próximo nível.\n\nuserXP.xpCoinsBalance – saldo de moedas (coins).\n\nCampos opcionais (podem ser ignorados sem quebrar nada):\n\n- birthYear\n- avatarUrl\n- dayStreak\n- createdAt\n- updatedAt\n\nid, userId",
             "url": {
-              "raw": "http://localhost:3000/user-xp/me",
-              "protocol": "http",
+              "raw": "{{dominio}}/user-xp/me",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "user-xp",
@@ -593,10 +593,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/gamification/overview",
-              "protocol": "http",
+              "raw": "{{dominio}}/gamification/overview",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "gamification",
@@ -622,10 +622,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/gamification/challenges",
-              "protocol": "http",
+              "raw": "{{dominio}}/gamification/challenges",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "gamification",
@@ -646,10 +646,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/gamification/challenges/:id/progress",
-              "protocol": "http",
+              "raw": "{{dominio}}/gamification/challenges/:id/progress",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "gamification",
@@ -691,14 +691,14 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/cash-flow/summary?month=11&year=2025",
-              "protocol": "http",
+              "raw": "{{dominio}}/cash-flow/summary?month=11&year=2025",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "cash-flow",
-                "summary"
+                "summary?month=11&year=2025"
               ],
               "query": [
                 {
@@ -724,10 +724,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/cash-flow",
-              "protocol": "http",
+              "raw": "{{dominio}}/cash-flow",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "cash-flow"
@@ -761,10 +761,10 @@
             },
             "description": "",
             "url": {
-              "raw": "http://localhost:3000/financial-health/overview",
-              "protocol": "http",
+              "raw": "{{dominio}}/financial-health/overview",
+              "protocol": "",
               "host": [
-                "localhost:3000"
+                "{{dominio}}"
               ],
               "path": [
                 "financial-health",
@@ -778,5 +778,11 @@
       ]
     }
   ],
-  "variable": []
+  "variable": [
+    {
+      "key": "dominio",
+      "value": "",
+      "type": "default"
+    }
+  ]
 }
