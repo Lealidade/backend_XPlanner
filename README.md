@@ -1,149 +1,163 @@
-XPlanner – Backend (XP Hackaton)
+# XPlanner – Backend
 
-Backend da aplicação XPlanner, focada em educação financeira + gamificação:
+Backend da aplicação **XPlanner**, focada em **educação financeira** + **gamificação**.
 
-Onboarding com quiz financeiro que gera um perfil por dimensão:
+O backend expõe APIs para:
 
-DESENROLA, ORGANIZA, RESERVA, INVESTE
+- Onboarding com quiz financeiro que gera um **perfil por dimensão**:
+  - `DESENROLA`, `ORGANIZA`, `RESERVA`, `INVESTE`
+- **Metas financeiras (goals)** ligadas a essas dimensões
+- **Fluxo de caixa (cash flow)** integrado às metas
+- **Trilhas de aprendizado (learning paths)** recomendadas com base no perfil
+- **Visão geral (overview)** combinando perfil + metas + fluxo de caixa
 
-Metas financeiras (goals) ligadas a essas dimensões
+---
 
-Fluxo de caixa (cash flow) integrado às metas
+## Stack
 
-Trilhas de aprendizado (learning paths) recomendadas com base no perfil
+- **Node.js** (recomendado: v22+)
+- **TypeScript**
+- **Fastify** (API HTTP)
+- **Prisma ORM** + **PostgreSQL**
+- **Docker / Docker Compose** (para o banco)
+- **Better Auth** (autenticação)
+- **tsyringe** (injeção de dependência)
+- **Zod** (validação)
 
-Visão geral (overview) combinando perfil + metas + fluxo de caixa
+---
 
-1. Stack
-
-Node.js (recomendado: v22+)
-
-TypeScript
-
-Fastify (API HTTP)
-
-Prisma ORM + PostgreSQL
-
-Docker / Docker Compose (para o banco)
-
-Better Auth (autenticação)
-
-tsyringe (injeção de dependência)
-
-Zod (validação)
-
-2. Pré-requisitos
+## Pré-requisitos
 
 Certifique-se de ter instalado na máquina:
 
-Node.js
- (22+ recomendado)
+- **Node.js** (22+ recomendado)
+- **npm** (instalado junto com o Node)
+- **Docker**
+- **Docker Compose**
 
-npm
- (instalado junto com o Node)
+---
 
-Docker
+## Como rodar o projeto localmente
 
-Docker Compose
+### 1. Clonar o repositório
 
-3. Como rodar o projeto localmente
-3.1. Clonar o repositório
-git clone <URL-DO-REPO>
+```bash
+git clone <url-do-repositorio>
 cd xplanner
+```
 
-3.2. Instalar dependências
+### 2. Instalar dependências
+
+```bash
 npm install
+```
 
-3.3. Configurar variáveis de ambiente
+### 3. Configurar variáveis de ambiente
 
-Crie um arquivo .env na raiz do projeto, por exemplo:
+Crie um arquivo `.env` na raiz do projeto, por exemplo:
 
+```env
 # URL do banco de dados PostgreSQL usado pelo Prisma
 DATABASE_URL="postgresql://postgres:postgres@localhost:5432/xplanner?schema=public"
 
 # Better Auth
 BETTER_AUTH_SECRET=uma_senha_grande_e_aleatoria
 BETTER_AUTH_URL=http://localhost:3000
+```
 
+**Observações:**
 
-🔎 Observação:
+- Ajuste `DATABASE_URL` se o seu Docker Compose usar outro usuário/senha/porta.
+- `BETTER_AUTH_SECRET` pode ser qualquer string grande e aleatória (em produção, isso deve ser bem protegida).
 
-Ajuste DATABASE_URL se o seu Docker Compose usar outro usuário/senha/porta.
+### 4. Subir o banco de dados com Docker Compose
 
-BETTER_AUTH_SECRET pode ser qualquer string grande e aleatória (em produção, isso deve ser bem protegido).
+Na raiz do projeto (onde está o `docker-compose.yml`):
 
-3.4. Subir o banco de dados com Docker Compose
-
-Na raiz do projeto (onde está o docker-compose.yml):
-
+```bash
 docker compose up -d
+```
 
+Isso deve subir um container PostgreSQL acessível em algo como `localhost:5432`.
 
-Isso deve subir um container PostgreSQL acessível em algo como localhost:5432.
+### 5. Rodar migrações do Prisma
 
-3.5. Rodar migrações do Prisma
+Para ambiente de produção/dev simples:
+
+```bash
 npx prisma migrate deploy
+```
 
+Ou, para ambiente de desenvolvimento com migrações interativas:
 
-Ou, para ambiente de desenvolvimento, se preferir:
-
+```bash
 npx prisma migrate dev
+```
 
-3.6. Rodar o seed do banco (dados iniciais)
+### 6. Rodar o seed do banco (dados iniciais)
 
 O projeto já tem script de seed configurado:
 
+```bash
 npm run db:seed
-
+```
 
 Isso normalmente popula:
 
-Perguntas e opções do quiz de onboarding
+- Perguntas e opções do quiz de onboarding
+- Templates de metas financeiras
+- Trilhas de aprendizado (learning paths) e seus passos
 
-Templates de metas financeiras
+### 7. Iniciar o servidor
 
-Trilhas de aprendizado (learning paths) e seus passos
-
-3.7. Iniciar o servidor
+```bash
 npm run dev
-
+```
 
 Por padrão a API sobe em:
 
+```text
 http://localhost:3000
+```
 
-4. Sobre autenticação
+---
 
-Quase todas as rotas abaixo assumem que o usuário está autenticado via Better Auth.
+## Sobre autenticação
 
-O backend usa:
+Quase todas as rotas abaixo assumem que o usuário está **autenticado via Better Auth**.
 
+Usamos algo como:
+
+```ts
 const session = await auth.api.getSession({
   headers: toWebHeaders(request.headers as any),
 });
+```
 
-
-Ou seja, ele espera receber os cookies de sessão do Better Auth nos headers.
+Ou seja, ele espera receber os **cookies de sessão do Better Auth** nos headers.
 
 Se você estiver usando apenas o backend:
 
-Ou reaproveita os cookies da aplicação frontend,
+- Reaproveite os cookies da aplicação frontend; **ou**
+- Chame as rotas padrão do Better Auth para criar conta / fazer login  
+  (não estão documentadas aqui porque o foco é o domínio de finanças).
 
-Ou chama as rotas padrão do Better Auth para criar conta / fazer login (não estão documentadas aqui porque o foco é o domínio de finanças).
+> Nos exemplos abaixo, os headers de autenticação são omitidos para não poluir, mas **todas essas rotas exigem usuário autenticado**.
 
-Nos exemplos abaixo, vou omitir os headers de autenticação para não poluir, mas todas essas rotas exigem usuário autenticado.
+---
 
-5. Rotas – Onboarding & Perfil Financeiro
-5.1. GET /onboarding/quiz
+## Rotas – Onboarding & Perfil Financeiro
 
-Retorna o quiz de onboarding (perguntas + opções) e garante a criação de um UserXP para o usuário.
+### 5.1. `GET /onboarding/quiz`
 
-Auth: obrigatório
+Retorna o quiz de onboarding (perguntas + opções) e garante a criação de um `UserXP` para o usuário.
 
-Body: nenhum
+- **Auth:** obrigatório
+- **Body:** nenhum
 
-Exemplo de resposta:
+**Exemplo de resposta:**
 
+```json
 {
   "userXPId": "cmianxwv10001hvyvj4p6y5h9",
   "questions": [
@@ -170,23 +184,23 @@ Exemplo de resposta:
     }
   ]
 }
+```
 
-5.2. POST /onboarding/quiz/answers
+---
 
-Recebe as respostas do quiz de onboarding, calcula o FinancialProfile do usuário e retorna:
+### 5.2. `POST /onboarding/quiz/answers`
 
-Score geral (overallScore, 0–1000)
+Recebe as respostas do quiz de onboarding, calcula o `FinancialProfile` do usuário e retorna:
 
-Score por dimensão (desenrolaScore, organizaScore, reservaScore, investeScore)
+- Score geral (`overallScore`, 0–1000)
+- Score por dimensão (`desenrolaScore`, `organizaScore`, `reservaScore`, `investeScore`)
+- `lastScoreChange` (quanto o score geral mudou nessa última avaliação)
+- Feedback por pergunta/opção
 
-lastScoreChange (quanto o score geral mudou nessa última avaliação)
+- **Auth:** obrigatório
+- **Body:**
 
-Feedback por pergunta/opção
-
-Auth: obrigatório
-
-Body:
-
+```json
 {
   "answers": [
     {
@@ -199,12 +213,13 @@ Body:
     }
   ]
 }
+```
 
+> `optionIndex` é o índice da opção no array `options` retornado na rota `/onboarding/quiz` (`0`, `1`, `2`...).
 
-optionIndex é o índice da opção no array options retornado na rota /onboarding/quiz (0, 1, 2...).
+**Resposta (exemplo simplificado):**
 
-Resposta (exemplo simplificado):
-
+```json
 {
   "financialProfile": {
     "overallScore": 542,
@@ -246,26 +261,30 @@ Resposta (exemplo simplificado):
     }
   ]
 }
+```
 
-5.3. GET /onboarding/financial-profile/me
+---
 
-Retorna o perfil financeiro atual do usuário, se já respondeu o quiz de onboarding.
+### 5.3. `GET /onboarding/financial-profile/me`
 
-Auth: obrigatório
+Retorna o perfil financeiro atual do usuário, se ele já respondeu o quiz de onboarding.
 
-Body: nenhum
+- **Auth:** obrigatório
+- **Body:** nenhum
 
-Caso ainda não tenha perfil:
+**Caso ainda não tenha perfil:**
 
+```json
 {
   "hasProfile": false,
   "message": "User has not completed onboarding quiz yet.",
   "profile": null
 }
+```
 
+**Caso já tenha perfil:**
 
-Caso já tenha perfil:
-
+```json
 {
   "hasProfile": true,
   "profile": {
@@ -283,17 +302,21 @@ Caso já tenha perfil:
     "updatedAt": "2025-11-22T19:12:11.449Z"
   }
 }
+```
 
-6. Rotas – Cash Flow
-6.1. POST /cash-flow
+---
 
-Cria uma nova movimentação de fluxo de caixa (entrada, saída ou transferência).
-Pode (ou não) estar vinculada a uma meta (userGoalId).
+## Rotas – Cash Flow
 
-Auth: obrigatório
+### 6.1. `POST /cash-flow`
 
-Body:
+Cria uma nova movimentação de fluxo de caixa (entrada, saída ou transferência).  
+Pode (ou não) estar vinculada a uma meta (`userGoalId`).
 
+- **Auth:** obrigatório
+- **Body:**
+
+```json
 {
   "date": "2025-11-22T15:30:00.000Z",
   "label": "Pagamento cartão Nubank",
@@ -303,14 +326,14 @@ Body:
   "userGoalId": "cmiaor2kr000dhvyvxporzao0",
   "recipient": "Nubank"
 }
+```
 
+> `operation`: `"INCOME" | "EXPENSE" | "TRANSFER"`  
+> `userGoalId` é opcional (se quiser associar a uma meta).
 
-operation: "INCOME" | "EXPENSE" | "TRANSFER"
+**Resposta:**
 
-userGoalId é opcional (se quiser associar a uma meta)
-
-Resposta:
-
+```json
 {
   "cashFlow": {
     "id": "cmiapgmhe0001hvw6wlmdupdk",
@@ -325,26 +348,28 @@ Resposta:
     "createdAt": "2025-11-22T19:51:59.954Z"
   }
 }
+```
 
-6.2. GET /cash-flow/summary?month=&year=
+---
+
+### 6.2. `GET /cash-flow/summary?month=&year=`
 
 Retorna um resumo do fluxo de caixa no mês/ano especificado.
 
-Auth: obrigatório
+- **Auth:** obrigatório
+- **Query params (opcionais):**
+  - `month` – `1` a `12` (default = mês atual)
+  - `year` – ex: `2025` (default = ano atual)
 
-Query params (opcionais):
+**Exemplo:**
 
-month – 1 a 12 (default = mês atual)
-
-year – ex: 2025 (default = ano atual)
-
-Exemplo:
-
+```http
 GET /cash-flow/summary?month=11&year=2025
+```
 
+**Resposta:**
 
-Resposta:
-
+```json
 {
   "period": {
     "month": 11,
@@ -380,19 +405,23 @@ Resposta:
     }
   ]
 }
+```
 
-7. Rotas – Metas & Gamificação (Goals)
+---
 
-Prefixo: /gamification/goals
+## Rotas – Metas & Gamificação (Goals)
 
-7.1. GET /gamification/goals/templates
+**Prefixo:** `/gamification/goals`
+
+### 7.1. `GET /gamification/goals/templates`
 
 Lista todos os templates de metas disponíveis (seedados no banco).
 
-Auth: obrigatório
+- **Auth:** obrigatório
 
-Resposta (exemplo):
+**Resposta (exemplo):**
 
+```json
 {
   "templates": [
     {
@@ -410,15 +439,19 @@ Resposta (exemplo):
     }
   ]
 }
+```
 
-7.2. GET /gamification/goals/me
+---
 
-Lista todas as metas do usuário (instâncias de UserGoal, com ou sem template).
+### 7.2. `GET /gamification/goals/me`
 
-Auth: obrigatório
+Lista todas as metas do usuário (instâncias de `UserGoal`, com ou sem template).
 
-Resposta (exemplo):
+- **Auth:** obrigatório
 
+**Resposta (exemplo):**
+
+```json
 {
   "goals": [
     {
@@ -447,19 +480,23 @@ Resposta (exemplo):
     }
   ]
 }
+```
 
-7.3. POST /gamification/goals
+---
+
+### 7.3. `POST /gamification/goals`
 
 Cria uma nova meta financeira.
 
-Pode ser baseada em um template (templateId preenchido)
+Pode ser:
 
-Ou 100% customizada (sem templateId)
+- Baseada em um template (`templateId` preenchido); ou
+- 100% customizada (sem `templateId`).
 
-Auth: obrigatório
+- **Auth:** obrigatório
+- **Body (exemplo com template):**
 
-Body (exemplo com template):
-
+```json
 {
   "templateId": "cmianx6k70000hvxebxwp7lx1",
   "customTitle": "Quitar dívidas do cartão Nubank",
@@ -467,10 +504,11 @@ Body (exemplo com template):
   "currentAmount": 0,
   "targetDate": "2025-12-31T00:00:00.000Z"
 }
+```
 
+**Resposta (exemplo):**
 
-Resposta (exemplo):
-
+```json
 {
   "goal": {
     "id": "cmiaor2kr000dhvyvxporzao0",
@@ -494,26 +532,29 @@ Resposta (exemplo):
     }
   }
 }
+```
 
+> **Obs.:** Ao criar a meta, o backend pode aplicar uma penalidade na dimensão correspondente do `FinancialProfile` (ex.: `DESENROLA` cai um pouco) para refletir a “nova dívida assumida”.
 
-Obs.: Ao criar a meta, o backend aplica uma penalidade na dimensão correspondente do FinancialProfile (ex.: DESENROLA cai um pouco) para refletir a “nova dívida assumida”.
+---
 
-7.4. PATCH /gamification/goals/:id/progress
+### 7.4. `PATCH /gamification/goals/:id/progress`
 
-Atualiza diretamente o valor atual da meta (currentAmount).
-É uma rota mais “administrativa”/manual (sem cash flow automático).
+Atualiza diretamente o valor atual da meta (`currentAmount`).  
+É uma rota mais “administrativa” / manual (sem cash flow automático).
 
-Auth: obrigatório
+- **Auth:** obrigatório
+- **Body:**
 
-Body:
-
+```json
 {
   "currentAmount": 1500
 }
+```
 
+**Resposta:**
 
-Resposta:
-
+```json
 {
   "goal": {
     "...": "mesmo formato da meta",
@@ -521,28 +562,31 @@ Resposta:
     "progressPercent": 50
   }
 }
+```
 
-7.5. POST /gamification/goals/:id/contribute
+---
+
+### 7.5. `POST /gamification/goals/:id/contribute`
 
 Rota principal para contribuir para uma meta.
 
-Incrementa o currentAmount
+Ela:
 
-Cria um registro de CashFlow (despesa)
+- Incrementa o `currentAmount`
+- Cria um registro de `CashFlow` (despesa)
+- Atualiza o `FinancialProfile`, devolvendo score na dimensão associada
+- Se a meta for concluída nesse momento, concede XP / coins
 
-Atualiza o FinancialProfile, devolvendo score na dimensão associada
+- **Auth:** obrigatório
+- **URL:**
 
-Se a meta for concluída nesse momento, dá XP/coins
-
-Auth: obrigatório
-
-URL:
-
+```http
 POST /gamification/goals/{goalId}/contribute
+```
 
+- **Body (exemplo):**
 
-Body (exemplo):
-
+```json
 {
   "amount": 500,
   "date": "2025-11-22T15:30:00.000Z",
@@ -550,10 +594,11 @@ Body (exemplo):
   "category": "Cartão de crédito",
   "recipient": "Nubank"
 }
+```
 
+**Resposta (exemplo):**
 
-Resposta real (exemplo):
-
+```json
 {
   "goal": {
     "id": "cmiaor2kr000dhvyvxporzao0",
@@ -600,19 +645,23 @@ Resposta real (exemplo):
     "updatedAt": "2025-11-22T19:12:11.449Z"
   }
 }
+```
 
-8. Rotas – Trilhas de Aprendizado (Learning Paths)
+---
 
-Prefixo: /learning-paths
+## Rotas – Trilhas de Aprendizado (Learning Paths)
 
-8.1. GET /learning-paths/recommended
+**Prefixo:** `/learning-paths`
 
-Retorna trilhas de aprendizado recomendadas com base no FinancialProfile do usuário.
+### 8.1. `GET /learning-paths/recommended`
 
-Auth: obrigatório
+Retorna trilhas de aprendizado recomendadas com base no `FinancialProfile` do usuário.
 
-Caso tenha perfil:
+- **Auth:** obrigatório
 
+**Caso tenha perfil:**
+
+```json
 {
   "hasProfile": true,
   "profile": {
@@ -645,30 +694,35 @@ Caso tenha perfil:
     }
   ]
 }
+```
 
+**Caso ainda não tenha perfil:**
 
-Caso ainda não tenha perfil:
-
+```json
 {
   "hasProfile": false,
   "message": "User has not completed onboarding quiz yet.",
   "profile": null,
   "recommendedPaths": []
 }
+```
 
-8.2. GET /learning-paths/:id
+---
+
+### 8.2. `GET /learning-paths/:id`
 
 Retorna uma trilha específica (com seus passos).
 
-Auth: obrigatório
+- **Auth:** obrigatório
+- **Exemplo:**
 
-Exemplo:
-
+```http
 GET /learning-paths/path1
+```
 
+**Resposta (exemplo):**
 
-Resposta (exemplo):
-
+```json
 {
   "id": "path1",
   "slug": "comece-pelas-dividas",
@@ -691,37 +745,45 @@ Resposta (exemplo):
     }
   ]
 }
+```
 
-8.3. GET /learning-paths/:id/progress
+---
+
+### 8.3. `GET /learning-paths/:id/progress`
 
 Retorna o progresso do usuário em uma trilha específica.
 
-Auth: obrigatório
+- **Auth:** obrigatório
 
-Resposta (exemplo):
+**Resposta (exemplo):**
 
+```json
 {
   "learningPathId": "path1",
   "totalSteps": 5,
   "completedStepsIds": ["step1", "step2"],
   "progressPercent": 40
 }
+```
 
-8.4. POST /learning-paths/steps/:stepId/complete
+---
+
+### 8.4. `POST /learning-paths/steps/:stepId/complete`
 
 Marca um passo da trilha como concluído e concede XP/coins de acordo com o tipo do passo (quiz, artigo, vídeo etc.).
 
-Auth: obrigatório
+- **Auth:** obrigatório
+- **URL:**
 
-URL:
-
+```http
 POST /learning-paths/steps/{stepId}/complete
+```
 
+- **Body:** vazio (tudo vem da URL e da sessão)
 
-Body: (vazio mesmo, tudo vem da URL e da sessão)
+**Resposta (exemplo):**
 
-Resposta (exemplo):
-
+```json
 {
   "progress": {
     "id": "pls123",
@@ -736,39 +798,38 @@ Resposta (exemplo):
     "xpCoins": 0
   }
 }
+```
 
+> Se o passo já estiver concluído, ele retorna o progresso existente e `rewards` com `xpPoints: 0`, `xpCoins: 0`.
 
-Se o passo já estiver concluído, ele retorna o progresso existente e rewards com xpPoints: 0, xpCoins: 0.
+---
 
-9. Rotas – Overview de Saúde Financeira
+## Rotas – Overview de Saúde Financeira
 
-Prefixo: /financial-health
+**Prefixo:** `/financial-health`
 
-9.1. GET /financial-health/overview?month=&year=
+### 9.1. `GET /financial-health/overview?month=&year=`
 
 Retorna um painel consolidado da saúde financeira do usuário:
 
-Score do perfil financeiro (por dimensão)
+- Score do perfil financeiro (por dimensão)
+- Resumo do fluxo de caixa no período
+- Quantidade de metas ativas e concluídas
 
-Resumo do fluxo de caixa no período
+- **Auth:** obrigatório
+- **Query params (opcionais):**
+  - `month` – `1` a `12` (padrão = mês atual)
+  - `year` – ex: `2025` (padrão = ano atual)
 
-Quantidade de metas ativas e concluídas
+**Exemplo:**
 
-Auth: obrigatório
-
-Query params (opcionais):
-
-month – 1 a 12 (padrão = mês atual)
-
-year – ex: 2025 (padrão = ano atual)
-
-Exemplo:
-
+```http
 GET /financial-health/overview?month=11&year=2025
+```
 
+**Resposta (exemplo):**
 
-Resposta (exemplo):
-
+```json
 {
   "period": {
     "month": 11,
@@ -821,45 +882,45 @@ Resposta (exemplo):
     "completedGoalsCount": 1
   }
 }
+```
 
-10. Como testar rapidamente (frontend / recrutador)
+---
 
-Clonar, rodar npm install.
+## Como testar rapidamente (frontend / recrutador)
 
-Configurar .env com DATABASE_URL, BETTER_AUTH_SECRET, BETTER_AUTH_URL.
+1. Clonar o repositório e rodar `npm install`.
+2. Configurar `.env` com `DATABASE_URL`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`.
+3. Subir banco com:
 
-Subir banco com:
+   ```bash
+   docker compose up -d
+   ```
 
-docker compose up -d
+4. Rodar migrações:
 
+   ```bash
+   npx prisma migrate deploy
+   ```
 
-Rodar migrações:
+5. Rodar seed:
 
-npx prisma migrate deploy
+   ```bash
+   npm run db:seed
+   ```
 
+6. Iniciar API:
 
-Rodar seed:
+   ```bash
+   npm run dev
+   ```
 
-npm run db:seed
+7. Usar um cliente HTTP (Bruno / Insomnia / Postman) para chamar:
 
+   - `GET /onboarding/quiz` → responder quiz via `POST /onboarding/quiz/answers`
+   - `GET /onboarding/financial-profile/me`
+   - `GET /gamification/goals/templates` → `POST /gamification/goals`
+   - `POST /gamification/goals/:id/contribute`
+   - `GET /financial-health/overview`
+   - `GET /learning-paths/recommended` e `GET /learning-paths/:id`
 
-Iniciar API:
-
-npm run dev
-
-
-Usar um cliente HTTP (Bruno / Insomnia / Postman) para chamar:
-
-GET /onboarding/quiz → responder quiz via POST /onboarding/quiz/answers
-
-GET /onboarding/financial-profile/me
-
-GET /gamification/goals/templates → POST /gamification/goals
-
-POST /gamification/goals/:id/contribute
-
-GET /financial-health/overview
-
-GET /learning-paths/recommended e /learning-paths/:id
-
-Lembrando: todas essas rotas assumem usuário autenticado, então é necessário estar com os cookies de sessão do Better Auth presentes nas requisições.
+> Lembrando: todas essas rotas assumem usuário autenticado, então é necessário estar com os **cookies de sessão do Better Auth** presentes nas requisições.
